@@ -1,5 +1,12 @@
 package wzy.com.demo.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccessTokenDTO {
 
     private String client_id;
@@ -47,4 +54,6 @@ public class AccessTokenDTO {
     public void setState(String state) {
         this.state = state;
     }
+
+
 }
