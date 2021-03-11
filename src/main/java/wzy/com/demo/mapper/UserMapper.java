@@ -12,4 +12,7 @@ import wzy.com.demo.pojo.User;
 public interface UserMapper {
     @Insert("insert into user (account_id,name,token,gmt_create,gmt_modified) values (#{name},#{accountId},#{token},#{gmtCreate},#{gmtModified})")
     public int insertUser(User user);
+
+    @Select("select * from user where token = #{token}")
+    public User getUserByToken(String token);
 }

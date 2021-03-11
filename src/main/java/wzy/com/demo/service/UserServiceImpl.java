@@ -12,13 +12,14 @@ public class UserServiceImpl implements UserService{
     private UserMapper userMapper;
 
     @Override
-    public void insertUser(String name,String token) {
+    public User insertUser(String name,String id) {
         User user = new User();
-        user.setAccountId(UUID.randomUUID().toString());
+        user.setAccountId(id);
         user.setName(name);
-        user.setToken(token);
+        user.setToken(UUID.randomUUID().toString());
         user.setGmtCreate(System.currentTimeMillis());
         user.setGmtModified(user.getGmtCreate());
         userMapper.insertUser(user);
+        return user;
     }
 }

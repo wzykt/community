@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import wzy.com.demo.dto.AccessTokenDTO;
 import wzy.com.demo.dto.GitHubUser;
+import wzy.com.demo.pojo.User;
 import wzy.com.demo.provider.GithubProvider;
 import wzy.com.demo.service.UserService;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AuthorizeController {
@@ -32,7 +35,8 @@ public class AuthorizeController {
     @RequestMapping("/callback")
     public String callback(@RequestParam("code") String code,
                            @RequestParam("state") String state,
-                           HttpServletRequest request) {
+                           HttpServletRequest request,
+                           HttpServletResponse response) {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setClient_secret(clientSecret);
@@ -43,9 +47,8 @@ public class AuthorizeController {
         GitHubUser gitHubUser = githubProvider.getGitHubUser(accessToken);
         System.out.println(gitHubUser);
         if (gitHubUser != null) {
-            userService.insertUser(gitHubUser.getLogin(),gitHubUser.getNode_id());
-            //登录成功，写入session
-            request.getSession().setAttribute("user", gitHubUser);
+            User user = userService.insertUser(gitHubUser.getName(), String.valueOf(gitHubUser.getId()));
+            response.addCookie(new Cookie("token",user.getToken()));
             //重定向到首页
             return "redirect:/";
         }

@@ -3,25 +3,25 @@ package wzy.com.demo.dto;
 
 public class GitHubUser {
 
-    private String login;
+    private String name;
     private Long id;
-    private String node_id;
+    private String bio;
 
     public GitHubUser() {
     }
 
-    public GitHubUser(String login, Long id, String node_id) {
-        this.login = login;
+    public GitHubUser(String name, Long id, String bio) {
+        this.name = name;
         this.id = id;
-        this.node_id = node_id;
+        this.bio = bio;
     }
 
-    public String getLogin() {
-        return login;
+    public String getName() {
+        return name;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getId() {
@@ -32,20 +32,11 @@ public class GitHubUser {
         this.id = id;
     }
 
-    public String getNode_id() {
-        return node_id;
+    public String getBio() {
+        return bio;
     }
 
-    public void setNode_id(String node_id) {
-        this.node_id = node_id;
-    }
-
-    @Override
-    public String toString() {
-        return "GitHubUser{" +
-                "login='" + login + '\'' +
-                ", id=" + id +
-                ", node_id='" + node_id + '\'' +
-                '}';
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }

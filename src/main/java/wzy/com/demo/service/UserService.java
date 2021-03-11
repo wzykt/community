@@ -4,6 +4,6 @@ import wzy.com.demo.pojo.User;
 
 public interface UserService {
 
-    void insertUser(String name,String token);
+    User insertUser(String name,String id);
 
 }
